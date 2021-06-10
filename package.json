@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@webfocus/app": "file:../app",
+    "cypress": "^7.5.0"
+  }
+}
