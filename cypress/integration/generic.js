@@ -1,5 +1,3 @@
-const port = require('../../shared.json').port
-
 context('Test WebfocusApp Server',() => {
     describe('General', () => {
         it('Displays application name', () => {

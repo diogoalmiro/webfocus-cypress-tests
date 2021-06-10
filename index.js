@@ -1,4 +1,3 @@
-let sharedConfiguration = require('./shared.json');
 let WebfocusApp = require('@webfocus/app');
 let app = new WebfocusApp({
     port : 9999,
