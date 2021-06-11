@@ -5,5 +5,6 @@ let app = new WebfocusApp({
 });
 
 app.registerComponent(require('./cypress-component'))
+app.registerComponent(require('./static-tests'))
 
 app.start();

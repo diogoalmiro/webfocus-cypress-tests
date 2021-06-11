@@ -1,19 +1,17 @@
 context('Test WebfocusApp Server',() => {
-    describe('General', () => {
-        it('Displays application name', () => {
+    describe('Root', () => {
+        beforeEach(()=>{
             cy.visit('/')
+        })
+        it('Displays application name', () => {
             cy.contains('Cypress Test Application')
         })
-    })
-    describe('Main Index', () => {
         it('Lists Components', () => {
-            cy.visit('/');
-            cy.get('.card').contains('Cypress Component Test')
-            cy.get('#navbar').contains('Cypress Component Test')
+            cy.contains('Cypress Component Test')
+            cy.contains('Static Tests')
         })
     })
-
-    describe('Component Index', () => {
+    describe('Cypress Component Test', () => {
         beforeEach(() => {
             cy.visit('/cypress-component-test/');
         })
@@ -38,6 +36,45 @@ context('Test WebfocusApp Server',() => {
             cy.request('/cypress-component-test/text.txt').should((res) => {
                 expect(res.status).to.eq(200)
                 expect(res.body).to.eq("This text should be served by the component.")
+            })
+        })
+    })
+
+    describe('Static Tests (Component Behaviour)', () => {
+        let expected = {
+            'render static-tests/index.pug' : "Server Side Render index.pug",
+            'return static-tests/file.txt' : "Text-plain file.txt",
+            'render static-tests/file.pug' : "Server Side Render file.pug",
+            'render static-tests/subfolder/index.pug' : "Server Side Render subfolder/index.pug",
+            'render static-tests/subfolder/file.pug' : "Server Side Render subfolder/file.pug",
+            'return static-tests/subfolder/file.txt' : "Text-plain subfolder/file.txt",
+        }
+        let itGets = (url, expectedResponse) => {
+            it(`GET ${url}','${expectedResponse}`, () => {
+                if( expectedResponse.startsWith("return") ){
+                    cy.request(url).should((res) => {
+                        expect(res.status).to.eq(200)
+                        expect(res.body).to.eq(expected[expectedResponse]);
+                    })
+                }
+                else{
+                    cy.visit(url).contains(expected[expectedResponse])
+                }
+            })
+        }
+        itGets('/static-tests/','render static-tests/index.pug')
+        itGets('/static-tests/file.txt','return static-tests/file.txt')
+        itGets('/static-tests/file','render static-tests/file.pug')
+        itGets('/static-tests/anotherfile.txt','render static-tests/index.pug')
+        itGets('/static-tests/subfolder/','render static-tests/subfolder/index.pug')
+        itGets('/static-tests/subfolder/file','render static-tests/subfolder/file.pug')
+        itGets('/static-tests/subfolder/file.txt','return static-tests/subfolder/file.txt')
+        itGets('/static-tests/subfolder/anotherfile.txt','render static-tests/index.pug')
+        itGets('/static-tests/anothersubfolder/anotherfile.txt','render static-tests/index.pug')
+        it('GET /api/static-tests/ -> returns JSON', () => {
+            cy.request('/api/static-tests/').should((res) => {
+                expect(res.status).to.eq(200)
+                expect(res.body).to.eq("API Component String")
             })
         })
     })
