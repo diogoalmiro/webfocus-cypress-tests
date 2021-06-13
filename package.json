@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "@webfocus/app": "^0.1.2",
+    "@webfocus/app": "^0.2.0",
+    "@webfocus/component": "^0.0.1",
     "cypress": "^7.5.0"
   }
 }

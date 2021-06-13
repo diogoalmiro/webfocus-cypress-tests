@@ -1,4 +1,4 @@
-let component = module.exports = require('@webfocus/app/component')('Cypress Component Test', 'Define UI for cypress tests')
+let component = module.exports = require('@webfocus/component')('Cypress Component Test', 'Define UI for cypress tests')
 let pagination = require('@webfocus/app/util').pagination;
 
 const STRING = `GET /api/${component.urlname}/ should return this string.`;
