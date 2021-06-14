@@ -4,6 +4,7 @@ let app = new WebfocusApp({
     name : "Cypress Test Application"
 });
 
+app.registerComponent(require('@webfocus/util/component'))
 app.registerComponent(require('./cypress-component'))
 app.registerComponent(require('./static-tests'))
 

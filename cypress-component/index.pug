@@ -1,6 +1,7 @@
 extends /layouts/main
 
 block head
+    script(src="/util/pagination.js") 
     script.
         getJSON(apibaseurl+'test-string').then(o => {
             document.getElementById('check-fetch').innerText = o
