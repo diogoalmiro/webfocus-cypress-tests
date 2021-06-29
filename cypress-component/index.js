@@ -7,4 +7,4 @@ component.app.get('/test-string', (req, res) => {
     res.json(STRING)
 })
 
-component.app.get('/test-pagination', pagination(async () => Array(100).fill(0).map((_,i) => i)))
+component.app.get('/test-pagination', pagination(async () => Array(100).fill().map((_,i) => i)))
