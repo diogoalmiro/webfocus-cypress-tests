@@ -38,6 +38,10 @@ context('Test WebfocusApp Server',() => {
                 expect(res.body).to.eq("This text should be served by the component.")
             })
         })
+
+        it('Inline Fetch', () => {
+            cy.get('[data-inline-fetch-map]').contains("Hello World!")
+        })
     })
 
     describe('Static Tests (Component Behaviour)', () => {
