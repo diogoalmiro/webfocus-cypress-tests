@@ -1,13 +1,12 @@
 extends /layouts/main
 
 block head
-    script(src="/util/pagination.mjs", type="module")
-    script(src="/util/inline-fetch.mjs", type="module")
+    script(src="/util/pagination.js")
+    script(src="/util/inline-fetch.js")
     script.
         getJSON(apibaseurl+'test-string').then(o => {
             document.getElementById('check-fetch').innerText = o
         })
-        addEventListener('PaginationAddedEntry', (event) => {})
 block main 
     p#check-text This is the render of pug, it should have headers and more generated html from the webfocus app.
     p#check-fetch 
