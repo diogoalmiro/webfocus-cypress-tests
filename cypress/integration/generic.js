@@ -16,7 +16,7 @@ context('Test WebfocusApp Server',() => {
             cy.visit('/cypress-component-test/');
         })
         it('Has a navbar', () => {
-            cy.get('nav.navbar').contains('Cypress Component Test')
+            cy.get('nav').contains('Cypress Component Test')
         })
         it('Renders pug', () => {
             cy.get('#check-text').contains("This is the render of pug, it should have headers and more generated html from the webfocus app.")
@@ -27,7 +27,8 @@ context('Test WebfocusApp Server',() => {
         it('Paginates results', () => {
             cy.get('#check-pagination > li').should('have.length', 33)
             cy.get('#check-pagination > li:last-child').contains('Item #32');
-            cy.get('[data-pagination-next').click() // follow next once
+            cy.get('[data-pagination-map]').contains("Item #1") // follow next once
+            cy.get('[data-pagination-next]').click() // follow next once
             cy.get('#check-pagination > li').should('have.length', 33)
             cy.get('#check-pagination > li:last-child').contains('Item #65');
         })
@@ -41,6 +42,7 @@ context('Test WebfocusApp Server',() => {
 
         it('Inline Fetch', () => {
             cy.get('[data-inline-fetch-map]').contains("Hello World!")
+            cy.get('[data-inline-fetch-function]').contains("Hello World!")
         })
     })
 

@@ -4,20 +4,20 @@ block head
     script(src="/util/pagination.js")
     script(src="/util/inline-fetch.js")
     script.
-        getJSON(apibaseurl+'test-string').then(o => {
+        getJSON("!{apibaseurl}test-string").then(o => {
             document.getElementById('check-fetch').innerText = o
         })
 block main 
     p#check-text This is the render of pug, it should have headers and more generated html from the webfocus app.
     p#check-fetch 
-    p= `It should also make some requests to ${apibaseurl}. The following are the responses:`
+    p It should also make some requests to !{apibaseurl}. The following are the responses:
     a(data-pagination-previous="check-pagination")
     a(data-pagination-next="check-pagination")
     ul#check-pagination(data-pagination-url=apibaseurl+'test-pagination',data-pagination-step=33)
         template 
-            li(data-pagination-map="Item ##{}")
+            li(data-pagination-map="Item ##{value}")
     #check-inline-fetch(data-inline-fetch-url=apibaseurl+'test-inline-fetch')
-        div(data-inline-fetch-map="msg")
-        div(data-inline-fetch-map="#{msg}")
+        div(data-inline-fetch-function="return value.msg")
+        div(data-inline-fetch-map="#{value.msg}")
 
     
